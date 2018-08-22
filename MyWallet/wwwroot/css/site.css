@@ -1,0 +1,128 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.navbar-inverse {
+    background-color: #333333;
+}
+
+.mainContainer {
+    max-width: 400px;
+    margin: auto;
+}
+
+.loginContainer {
+    background-color: rgba(229, 229, 229, 0.95);
+    padding: 80px 30px 30px 30px;
+    border-radius: 10px;
+    margin-top: -50px;
+    margin-bottom: 20px;
+}
+
+.logoImage {
+    max-width: 200px;
+    text-align: center;
+    margin: auto;
+}
+
+.loggedUserMessage {
+    color: #ffffff;
+    height: 50px;
+    padding-top: 15px;
+}
+
+.menuItem {
+    margin-bottom: 30px;
+}
+
+.menuImage {
+    max-width: 60px;
+}
+
+body a:hover {
+    text-decoration: none;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.formOptions {
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #808080;
+}
+
+.smallForm {
+    max-width: 400px;
+    margin: auto;
+}
+
+.transactionForm {
+    max-width: 500px;
+    margin: auto;
+}
+
+.actionCol {
+    max-width: 50px;
+}
+
+.smallTable {
+    max-width: 600px;
+    margin: auto;
+}
+
+.categoryTable {
+    max-width: 800px;
+    margin: auto;
+}
+
+.contactPage {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.developerPhoto {
+    border: 3px solid darkblue;
+    border-radius: 20px;
+}

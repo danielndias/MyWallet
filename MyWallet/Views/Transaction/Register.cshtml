@@ -1,0 +1,153 @@
+﻿@model TransactionModel
+
+@{
+    ViewData["Title"] = "Register a new Transaction";
+}
+
+
+<h2 class="text-center">Register a new Transaction</h2>
+
+@{
+    var vDate = "";
+    var vType = "";
+    var vAmount = 0.0;
+    var vDescription = "";
+    var vId = 0;
+    var vAccount = 0;
+    var vCategory = 0;
+
+
+    try
+    {
+        vId = Convert.ToInt32(ViewBag.Register.Id.ToString());
+        vDate = ViewBag.Register.Date.ToString();
+        vType = ViewBag.Register.Type.ToString();
+        vDescription = ViewBag.Register.Description.ToString();
+        vAccount = Convert.ToInt32(ViewBag.Register.Account_Id.ToString());
+        vCategory = Convert.ToInt32(ViewBag.Register.Category_Id.ToString());
+        vAmount = Convert.ToDouble(ViewBag.Register.Amount.ToString());
+    }
+    catch { }
+}
+
+<div class="formOptions transactionForm">
+    <form asp-controller="Transaction" asp-action="Register">
+        <input type="hidden" asp-for="Id" value="@vId" />
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="Type">Type</label>
+                    @{
+                        if (vType == "Income")
+                        {
+                            <div class="radio">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label><input type="radio" asp-for="Type" value="1" unchecked /> Expense</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label><input type="radio" asp-for="Type" value="2" checked /> Income</label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="radio">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label><input type="radio" asp-for="Type" value="1" checked /> Expense</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label><input type="radio" asp-for="Type" value="2" unchecked /> Income</label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Date">Date:</label>
+                    <input type="date" class="form-control" asp-for="Date" value="@vDate">
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Amount">Amount:</label>
+                    <input type="number" class="form-control" asp-for="Amount" value="@vAmount">
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="Description">Description:</label>
+                    <input type="text" class="form-control" asp-for="Description" value="@vDescription">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Account_id">Account:</label>
+                    <select asp-for="Account_Id" class="form-control">
+                        @{
+                            if (ViewBag.listAccounts != null)
+                            {
+                                foreach (var item in (List<AccountModel>)ViewBag.listAccounts)
+                                {
+                                    if (vAccount == Convert.ToInt32(item.Id.ToString()))
+                                    {
+                                        <option value="@item.Id.ToString()" selected>@item.Name.ToString()</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id.ToString()">@item.Name.ToString()</option>
+                                    }
+                                }
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Account_id">Category:</label>
+                    <select asp-for="Category_Id" class="form-control">
+                        @{
+                            if (ViewBag.listCategories != null)
+                            {
+                                foreach (var item in (List<CategoryModel>)ViewBag.listCategories)
+                                {
+                                    if (vCategory == Convert.ToInt32(item.Id.ToString()))
+                                    {
+                                        <option value="@item.Id.ToString()" selected>@item.Description.ToString()</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id.ToString()">@item.Description.ToString()</option>
+                                    }
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block">Register</button>
+
+    </form>
+
+</div>

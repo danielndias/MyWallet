@@ -1,0 +1,36 @@
+﻿
+<h2 class="text-center">My Categories</h2>
+
+<div class="formOptions categoryTable">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+                        foreach (var item in (List<CategoryModel>)ViewBag.ListCategories)
+                        {
+                            <tr>
+                                <td class="actionCol">
+                                    <a href="../Category/CreateCategory/@item.Id.ToString()" class="btn btn-primary">Edit</a>
+                                    <a href="../Category/RemoveCategory/@item.Id.ToString()" class="btn btn-danger">Remove</a>
+                                </td>
+                                <td>@item.Description.ToString()</td>
+                                <td>@item.Type.ToString()</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <a href="../Category/CreateCategory" class="btn btn-block btn-primary">Insert a new Category</a>
+        </div>
+    </div>
+</div>

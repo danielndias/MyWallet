@@ -1,0 +1,48 @@
+﻿@model UserModel
+
+@{
+    Layout = "../Shared/_LayoutLogin.cshtml";
+
+    ViewData["Title"] = "Login";
+}
+
+<div class="mainContainer text-center">
+    <img src="~/images/logo.png" class="logoImage img-fluid" />
+    <div class="loginContainer">
+        <h3>Login</h3>
+        <form asp-controller="User" asp-action="ValidateLogin" class="text-left">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" asp-for="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" asp-for="Password" required>
+            </div>
+
+            @{
+                try
+                {
+                    if (TempData["InvalidLoginAttempt"] != null)
+                    {
+                        <div class="alert alert-danger fade in alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <p>@TempData["InvalidLoginAttempt"]</p>
+                        </div>
+                    }
+                }
+                catch { }
+            }
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="User/Register" class="btn btn-primary btn-block">Register</a>
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-success btn-block">Login</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

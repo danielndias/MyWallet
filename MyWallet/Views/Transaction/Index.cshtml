@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "My Transactions";
+}
+
+<h2 class="text-center">My Transactions</h2>
+
+<div class="formOptions">
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th colspan="2">Action</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Account</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                foreach (var item in (List<TransactionModel>)ViewBag.ListTransactions)
+                {
+                    <tr>
+                        <td><a href="../Transaction/Register/@item.Id.ToString()" class="btn btn-primary">Edit</a></td>
+                        <td><a href="../Transaction/RemoveTransaction/@item.Id.ToString()" class="btn btn-danger">Remove</a></td>
+                        <td>@item.Date.ToString()</td>
+                        <td>@item.Type.ToString()</td>
+                        <td>R$ @item.Amount.ToString()</td>
+                        <td>@item.Description.ToString()</td>
+                        <td>@item.Account_Name.ToString()</td>
+                        <td>@item.Category_Name.ToString()</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <a href="../Transaction/Register" class="btn btn-block btn-primary">Insert a new Transaction</a>
+</div>

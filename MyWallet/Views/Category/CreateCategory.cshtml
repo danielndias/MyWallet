@@ -1,0 +1,64 @@
+﻿@model CategoryModel
+
+<h2 class="text-center">Insert a new Category</h2>
+
+@{ 
+    var vDescription = "";
+    var vType = "";
+    var vId = 0;
+
+
+    try
+    {
+        vId = Convert.ToInt32(ViewBag.Register.Id.ToString());
+        vDescription = ViewBag.Register.Description.ToString();
+        vType = ViewBag.Register.Type.ToString();
+    }
+    catch { }
+}
+
+<form asp-controller="Category" asp-action="CreateCategory">
+    <input type="hidden" asp-for="Id" value="@vId" />
+
+    <div class="formOptions smallForm">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="Description">Account Name:</label>
+                    <input type="text" class="form-control" asp-for="Description" value="@vDescription">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="Type">Type</label>
+                    @{
+                        if (vType == "Income")
+                        {
+                            <div class="radio">
+                                <label><input type="radio" asp-for="Type" value="1" unchecked /> Expense</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" asp-for="Type" value="2" checked /> Income</label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="radio">
+                                <label><input type="radio" asp-for="Type" value="1" checked /> Expense</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" asp-for="Type" value="2" unchecked /> Income</label>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Create</button>
+    </div>   
+
+</form>

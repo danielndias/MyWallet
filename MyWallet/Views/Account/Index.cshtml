@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "My Accounts";
+}
+
+<h2 class="text-center">My Accounts</h2>
+
+<div class="formOptions smallTable">
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Name</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+
+                foreach (var item in (List<AccountModel>)ViewBag.ListAccount)
+                {
+                    string accountStatus = item.Balance >= 0 ? "green" : "red";
+                    <tr>
+                        <td><a href="RemoveAccount/@item.Id.ToString()" class="btn btn-danger">Remove</a></td>
+                        <td>@item.Name.ToString()</td>
+                        <td class="@accountStatus">R$ @item.Balance.ToString()</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <a href="CreateAccount" class="btn btn-block btn-primary">Insert a new Account</a>
+
+</div>

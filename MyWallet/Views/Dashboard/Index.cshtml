@@ -1,0 +1,106 @@
+﻿@model DashboardModel
+
+@{
+    ViewData["Title"] = "My Dashboard";
+}
+
+<h2 class="text-center">My Dashboard</h2>
+<br /><br />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+<form asp-controller="Dashboard" asp-action="Index">
+
+    <div class="formOptions">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="StartDate">Start Date:</label>
+                    <input type="date" class="form-control" asp-for="StartDate">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="EndDate">End Date:</label>
+                    <input type="date" class="form-control" asp-for="EndDate">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Search</button>
+    </div>
+
+</form>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4 class="text-center">Expenses</h4>
+        <div id="canvas-expenses-holder" style="width:80%; margin: auto">
+            @{
+                if (@TempData["NoExpenses"] != null)
+                {
+                    <div class="alert alert-danger fade in alert-dismissible">
+                        <p class="text-center">@TempData["NoExpenses"]</p>
+                    </div>
+                }
+            }
+            <canvas id="chart-expenses-area"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4 class="text-center">Incomes</h4>
+        <div id="canvas-incomes-holder" style="width:80%; margin: auto">
+            @{
+                if (@TempData["NoIncomes"] != null)
+                {
+                    <div class="alert alert-danger fade in alert-dismissible">
+                        <p class="text-center">@TempData["NoIncomes"]</p>
+                    </div>
+                }
+            }
+            <canvas id="chart-incomes-area"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+
+		var expensesChart = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [@Html.Raw(ViewBag.ExpValues)],
+
+					backgroundColor: [@Html.Raw(ViewBag.ExpColors)],
+					label: 'Expenses'
+				}],
+				labels: [@Html.Raw(ViewBag.ExpLabels)]
+			},
+			options: {
+				responsive: true
+			}
+		};
+
+		var incomesChart = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [@Html.Raw(ViewBag.IncValues)],
+
+					backgroundColor: [@Html.Raw(ViewBag.IncColors)],
+					label: 'Incomes'
+				}],
+				labels: [@Html.Raw(ViewBag.IncLabels)]
+			},
+			options: {
+				responsive: true
+			}
+		};
+
+		window.onload = function () {
+			var ctxExpenses = document.getElementById('chart-expenses-area').getContext('2d');
+			window.myPie = new Chart(ctxExpenses, expensesChart);
+			var ctxIncomes = document.getElementById('chart-incomes-area').getContext('2d');
+			window.myPie = new Chart(ctxIncomes, incomesChart);
+		};
+
+
+</script>

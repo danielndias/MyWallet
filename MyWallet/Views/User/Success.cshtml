@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "User Created";
+
+    Layout = "../Shared/_LayoutLogin.cshtml";
+}
+
+<div class="mainContainer text-center">
+    <img src="~/images/logo.png" class="logoImage img-fluid" />
+    <div class="loginContainer">
+
+        @{
+            <h2 class="text-center userSuccessMessage">Welcome, @TempData["UserCreated"]!</h2>
+        }
+        <h3>Your Account Was Successfully Created</h3>
+        <br />
+        <a href="../../" class="btn btn-success btn-block">Login</a>
+    </div>
+</div>

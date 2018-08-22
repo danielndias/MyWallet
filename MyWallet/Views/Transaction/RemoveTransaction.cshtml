@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Confirm Transaction Removal";
+}
+
+<h2 class="text-center">Are You Sure You Want to Delete the Transaction?</h2>
+
+<p><strong>Date:</strong> @ViewBag.Register.Date.ToString()</p>
+<p><strong>Amount:</strong> R$ @ViewBag.Register.Amount.ToString()</p>
+<p><strong>Description:</strong> @ViewBag.Register.Description.ToString()</p>
+<p><strong>Account:</strong> @ViewBag.Register.Account_Name.ToString()</p>
+<p><strong>Category:</strong> @ViewBag.Register.Category_Name.ToString()</p>
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <a href="../../Transaction/Index" class="btn btn-block btn-default">Cancel</a>
+    </div>
+    <div class="col-sm-6">
+        <a href="../../Transaction/Remove/@ViewBag.Register.Id.ToString()" class="btn btn-block btn-danger">Delete</a>
+    </div>
+</div>
+

@@ -1,0 +1,92 @@
+﻿@model TransactionModel
+
+@{
+    ViewData["Title"] = "Statement";
+}
+
+<h2 class="text-center">Generate Statement</h2>
+
+<form asp-controller="Transaction" asp-action="Statement">
+
+    <div class="formOptions">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Date">Start Date:</label>
+                    <input type="date" class="form-control" asp-for="Date">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="EndDate">End Date:</label>
+                    <input type="date" class="form-control" asp-for="EndDate">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="Type">Type</label>
+                    <div class="radio">
+                        <label><input type="radio" asp-for="Type" value="3" checked /> Expenses & Incomes</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" asp-for="Type" value="1" /> Expenses</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" asp-for="Type" value="2" /> Incomes</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="Account_id">Account:</label>
+                    <select asp-for="Account_Id" class="form-control">
+                        @{
+                            <option value="0">All Accounts</option>
+                            foreach (var item in (List<AccountModel>)ViewBag.listAccounts)
+                            {
+                                <option value="@item.Id.ToString()">@item.Name.ToString()</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Search</button>
+    </div>
+</form>
+<br />
+<table class="table table-striped table-responsive">
+    <thead>
+        <tr>
+            <th colspan="2">Action</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Account</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @{
+            foreach (var item in (List<TransactionModel>)ViewBag.ListTransactions)
+            {
+                <tr>
+                    <td><a href="../Transaction/Register/@item.Id.ToString()" class="btn btn-primary">Edit</a></td>
+                    <td><a href="../Transaction/RemoveTransaction/@item.Id.ToString()" class="btn btn-danger">Remove</a></td>
+                    <td>@item.Date.ToString()</td>
+                    <td>@item.Type.ToString()</td>
+                    <td>R$ @item.Amount.ToString()</td>
+                    <td>@item.Description.ToString()</td>
+                    <td>@item.Account_Name.ToString()</td>
+                    <td>@item.Category_Name.ToString()</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
