@@ -46,7 +46,10 @@ namespace MyWallet.Controllers
         public IActionResult RemoveAccount(int id)
         {
             AccountModel objAccount = new AccountModel(HttpContextAccessor);
-            objAccount.Remove(id);
+            if (!objAccount.Remove(id))
+            {
+                TempData["ErrorRemoveAccount"] = "The Account Cannot be Removed"; 
+            }
             return RedirectToAction("Index");
         }
     }

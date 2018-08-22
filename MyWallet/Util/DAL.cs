@@ -11,17 +11,16 @@ namespace MyWallet.Util
 {
     public class DAL
     {
-        private static string server = "localhost";
+        private static string server = "walletmysql.mysql.database.azure.com";
         private static string database = "mywallet";
-        private static string user = "root";
-        private static string password = "";
+        private static string user = "dnunes88@walletmysql";
+        private static string password = "P@ssword";
         private string connectionString = $"Server={server};Database={database};Uid={user};Pwd={password};SslMode=none;convert zero datetime=True";
         private MySqlConnection connection;
 
         public DAL()
         {
             connection = new MySqlConnection(connectionString);
-            //connection.Open();
         }
 
         //DQL Operations

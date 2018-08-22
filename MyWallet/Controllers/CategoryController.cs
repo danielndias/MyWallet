@@ -58,8 +58,13 @@ namespace MyWallet.Controllers
 
         public IActionResult RemoveCategory(int id)
         {
-            CategoryModel objAccount = new CategoryModel(HttpContextAccessor);
-            objAccount.Remove(id);
+            CategoryModel objCategory = new CategoryModel(HttpContextAccessor);
+
+            if (!objCategory.Remove(id))
+            {
+                TempData["ErrorRemoveCategory"] = "The Category Cannot be Removed";
+            }
+
             return RedirectToAction("Index");
         }
     }

@@ -27,14 +27,10 @@ namespace MyWallet.Models
 
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Please provide an Account")]
         public int Account_Id { get; set; }
-        [Required(ErrorMessage = "Please provide an Account")]
         public string Account_Name { get; set; }
 
-        [Required(ErrorMessage = "Please provide a Category")]
         public int Category_Id { get; set; }
-        [Required(ErrorMessage = "Please provide a Category")]
         public string Category_Name { get; set; }
 
         public int User_Id { get; set; }
@@ -57,7 +53,7 @@ namespace MyWallet.Models
 ;
             string idLoggedUser = HttpContextAccessor.HttpContext.Session.GetString("IdLoggedUser");
 
-            string sql = $"SELECT Id, Date, Type, Amount, Description, Account_Id, Account_Name, Category_Id, Category_Name FROM transaction_complete_info WHERE User_Id = {idLoggedUser} {filter} ORDER BY Date DESC limit 10";
+            string sql = $"SELECT Id, Date, Type, Amount, Description, Account_Id, Account_Name, Category_Id, Category_Name FROM transaction_complete_information WHERE User_Id = {idLoggedUser} {filter} ORDER BY Date DESC limit 10";
 
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetrieveDataTable(sql);
@@ -158,7 +154,7 @@ namespace MyWallet.Models
 
             string idLoggedUser = HttpContextAccessor.HttpContext.Session.GetString("IdLoggedUser");
 
-            string sql = $"SELECT Id, Date, Type, Amount, Description, Account_Id, Account_Name, Category_Id, Category_Name FROM transaction_complete_info WHERE User_Id = {idLoggedUser} AND ID = {id}";
+            string sql = $"SELECT Id, Date, Type, Amount, Description, Account_Id, Account_Name, Category_Id, Category_Name FROM transaction_complete_information WHERE User_Id = {idLoggedUser} AND ID = {id}";
 
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetrieveDataTable(sql);

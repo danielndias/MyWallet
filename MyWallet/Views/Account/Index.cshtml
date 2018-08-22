@@ -21,7 +21,9 @@
                 {
                     string accountStatus = item.Balance >= 0 ? "green" : "red";
                     <tr>
-                        <td><a href="RemoveAccount/@item.Id.ToString()" class="btn btn-danger">Remove</a></td>
+                        <td>
+                            <a href="RemoveAccount/@item.Id.ToString()" class="btn btn-danger">Remove</a>
+                        </td>
                         <td>@item.Name.ToString()</td>
                         <td class="@accountStatus">R$ @item.Balance.ToString()</td>
                     </tr>
@@ -29,7 +31,15 @@
             }
         </tbody>
     </table>
-
+    @{
+        if (@TempData["ErrorRemoveAccount"] != null)
+        {
+            <div class="alert alert-danger fade in alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p>@TempData["ErrorRemoveAccount"]</p>
+            </div>
+        }
+    }
     <a href="CreateAccount" class="btn btn-block btn-primary">Insert a new Account</a>
 
 </div>

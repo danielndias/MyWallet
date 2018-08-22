@@ -29,7 +29,15 @@
                     }
                 </tbody>
             </table>
-
+            @{
+                if (@TempData["ErrorRemoveCategory"] != null)
+                {
+                    <div class="alert alert-danger fade in alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p>@TempData["ErrorRemoveCategory"]</p>
+                    </div>
+                }
+            }
             <a href="../Category/CreateCategory" class="btn btn-block btn-primary">Insert a new Category</a>
         </div>
     </div>

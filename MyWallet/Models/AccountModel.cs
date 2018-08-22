@@ -65,10 +65,23 @@ namespace MyWallet.Models
 
         }
 
-        public void Remove(int id)
+        public bool Remove(int id)
         {
-            string sql = $"DELETE FROM ACCOUNT WHERE ID={id}";
-            new DAL().ExecuteSQLCommand(sql);
+            string sql = $"SELECT id from transaction where account_id = {id}";
+
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetrieveDataTable(sql);
+
+            if (dt.Rows.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                sql = $"DELETE FROM ACCOUNT WHERE ID={id}";
+                objDAL.ExecuteSQLCommand(sql);
+                return true;
+            }
         }
         
     }
