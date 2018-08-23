@@ -59,16 +59,12 @@ namespace MyWallet.Models
         {
             string idLoggedUser = HttpContextAccessor.HttpContext.Session.GetString("IdLoggedUser");
 
-            //string sql = $"INSERT INTO CATEGORY (Description, Type, User_Id) VALUES('{Description}', {Convert.ToInt32(Type)}, {idLoggedUser})";
-
             DAL objDAL = new DAL();
             objDAL.InsertCategory(this, idLoggedUser);
         }
         public void Update()
         {
             string idLoggedUser = HttpContextAccessor.HttpContext.Session.GetString("IdLoggedUser");
-
-            //string sql = $"UPDATE CATEGORY SET Description = '{Description}', Type = {Convert.ToInt32(Type)} WHERE User_Id = {idLoggedUser} AND Id = {Id}";
 
             DAL objDAL = new DAL();
             objDAL.UpdateCategory(this);
